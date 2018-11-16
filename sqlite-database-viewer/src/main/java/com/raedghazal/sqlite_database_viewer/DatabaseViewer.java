@@ -47,7 +47,7 @@ public class DatabaseViewer {
         this.databaseHelper = databaseHelper;
     }
 
-    protected View onCreate() {
+    public View onCreate() {
 
         LinearLayout parentLinearLayout = new LinearLayout(context);
         parentLinearLayout.setOrientation(LinearLayout.VERTICAL);
