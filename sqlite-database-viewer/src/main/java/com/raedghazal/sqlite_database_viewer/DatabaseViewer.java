@@ -21,6 +21,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.HorizontalScrollView;
@@ -85,15 +86,19 @@ public class DatabaseViewer {
         actv.setAdapter(arrayAdapter);
 
         // fill RecyclerView on Table Selected
-        actv.setOnItemClickListener((parent, view, position, id) -> {
-            MyAdapter adapter = new MyAdapter(
-                    getDataAndColumns(arrayAdapter.getItem(position)).get(COLUMNS)
-                    ,getDataAndColumns(arrayAdapter.getItem(position)).get(DATA));
-            RecyclerView.LayoutManager mLayoutManager= new LinearLayoutManager(context);
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapter);
+        actv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MyAdapter adapter = new MyAdapter(
+                        getDataAndColumns(arrayAdapter.getItem(position)).get(COLUMNS)
+                        ,getDataAndColumns(arrayAdapter.getItem(position)).get(DATA));
+                RecyclerView.LayoutManager mLayoutManager= new LinearLayoutManager(context);
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(adapter);
+            }
         });
+
     }
     private ArrayList<String> getAllTables()
     {
@@ -244,7 +249,12 @@ public class DatabaseViewer {
                 }
 
                 holder.tvs.get("tv"+i).setEms(ems()[i]/2 +2);
-                holder.tvs.get("tv"+i).setOnClickListener(view -> Toast.makeText(view.getContext(),((TextView)view).getText(),Toast.LENGTH_SHORT).show());
+                holder.tvs.get("tv"+i).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(v.getContext(),((TextView)v).getText(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
 
