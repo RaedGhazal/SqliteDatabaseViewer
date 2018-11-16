@@ -135,7 +135,9 @@ public class RGDatabaseViewer {
 
                 cursorGetData.moveToNext();
             }
-
+            String[] g = dataList.get(0);
+            g[g.length+1] = " Raed ";
+            dataList.set(0,g);
         dataAndColumnsList.add(dataList);
         dataAndColumnsList.add(columnsList);
         cursorGetData.close();

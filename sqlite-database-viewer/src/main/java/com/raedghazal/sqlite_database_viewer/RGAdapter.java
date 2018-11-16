@@ -33,10 +33,24 @@ public class RGAdapter extends RecyclerView.Adapter<RGAdapter.MyViewHolder>
         this.context = context;
         this.headerStringArray = headerStringArray;
         this.dataList = dataList;
+        if (!checkLengths())
+            return;
         //Add the Header
         dataList.add(0,headerStringArray);
     }
-
+    public boolean checkLengths()
+    {
+        int maxLength = headerStringArray.length;
+        for (int i = 0; i < dataList.size();i++)
+        {
+            if (dataList.get(i).length > maxLength)
+            {
+                Toast.makeText(context,"data length shouldn't be bigger than header length",Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+        return true;
+    }
     private LayerDrawable border()
     {
         GradientDrawable border = new GradientDrawable();
