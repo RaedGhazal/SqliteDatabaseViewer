@@ -89,7 +89,7 @@ public class RGDatabaseViewer {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 RGAdapter adapter = new RGAdapter(context,
-                        (String[])getDataAndColumns(arrayAdapter.getItem(position)).get(COLUMNS).toArray()
+                        getDataAndColumns(arrayAdapter.getItem(position)).get(COLUMNS)
                         ,getDataAndColumns(arrayAdapter.getItem(position)).get(DATA));
                 RecyclerView.LayoutManager mLayoutManager= new LinearLayoutManager(context);
                 recyclerView.setLayoutManager(mLayoutManager);
