@@ -25,22 +25,25 @@ import java.util.HashMap;
 
 public class RGAdapter extends RecyclerView.Adapter<RGAdapter.MyViewHolder>
 {
-    private String[] headerStringArray;
+    private ArrayList<String> headerList;
     private ArrayList<String[]> dataList;
     private Context context;
 
-    RGAdapter(Context context,String[] headerStringArray, ArrayList<String[]> dataList) {
+    RGAdapter(Context context,ArrayList<String> headerList, ArrayList<String[]> dataList) {
         this.context = context;
-        this.headerStringArray = headerStringArray;
+        this.headerList = headerList;
         this.dataList = dataList;
         if (!checkLengths())
             return;
         //Add the Header
-        dataList.add(0,headerStringArray);
+        String[] header = new String[headerList.size()];
+        for (int i = 0;i<headerList.size();i++)
+            header[i] = headerList.get(i);
+        dataList.add(0,header);
     }
     public boolean checkLengths()
     {
-        int maxLength = headerStringArray.length;
+        int maxLength = headerList.size();
         for (int i = 0; i < dataList.size();i++)
         {
             if (dataList.get(i).length > maxLength)
@@ -64,7 +67,7 @@ public class RGAdapter extends RecyclerView.Adapter<RGAdapter.MyViewHolder>
     }
     private int[] ems()
     {
-        int[] ems = new int[headerStringArray.length];
+        int[] ems = new int[headerList.size()];
         for (int i=0;i<ems.length;i++)
         {
             int maxLength =0;
@@ -89,7 +92,7 @@ public class RGAdapter extends RecyclerView.Adapter<RGAdapter.MyViewHolder>
 
             int padding  = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10, context.getResources().getDisplayMetrics());
             llHolder =(LinearLayout)itemView;
-            for (int i = 0; i< headerStringArray.length; i++)
+            for (int i = 0; i< headerList.size(); i++)
             {
                 tvs.put("tv"+i,new TextView(view.getContext()));
 
@@ -117,7 +120,7 @@ public class RGAdapter extends RecyclerView.Adapter<RGAdapter.MyViewHolder>
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
-        for (int i = 0; i< headerStringArray.length; i++)
+        for (int i = 0; i< headerList.size(); i++)
         {
             if (position == 0)
             {
