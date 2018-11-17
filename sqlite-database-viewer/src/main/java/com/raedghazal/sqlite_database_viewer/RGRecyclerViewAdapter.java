@@ -18,18 +18,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class RGAdapter extends RecyclerView.Adapter<RGAdapter.MyViewHolder>
+public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAdapter.MyViewHolder>
 {
     private ArrayList<String> headerList;
     private ArrayList<String[]> dataList;
     private Context context;
 
-    RGAdapter(Context context,ArrayList<String> headerList, ArrayList<String[]> dataList) {
+    public RGRecyclerViewAdapter(Context context, ArrayList<String> headerList, ArrayList<String[]> dataList) {
         this.context = context;
         this.headerList = headerList;
         this.dataList = dataList;
@@ -95,7 +94,6 @@ public class RGAdapter extends RecyclerView.Adapter<RGAdapter.MyViewHolder>
             for (int i = 0; i< headerList.size(); i++)
             {
                 tvs.put("tv"+i,new TextView(view.getContext()));
-
                 tvs.get("tv"+i).setLayoutParams(new LinearLayout.LayoutParams(-2,-2));
                 tvs.get("tv"+i).setLines(1);
                 tvs.get("tv"+i).setPaddingRelative(padding,0,padding,0);
@@ -120,32 +118,29 @@ public class RGAdapter extends RecyclerView.Adapter<RGAdapter.MyViewHolder>
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
-        for (int i = 0; i< headerList.size(); i++)
-        {
-            if (position == 0)
-            {
-                SpannableString ss = new SpannableString("."+ dataList.get(position)[i]);
-                ss.setSpan(new RelativeSizeSpan(2f),0,1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-                ss.setSpan(new ForegroundColorSpan(Color.RED),0,1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        for (int i = 0; i< headerList.size(); i++) {
+            if (position == 0) {
+                SpannableString ss = new SpannableString("." + dataList.get(position)[i]);
+                ss.setSpan(new RelativeSizeSpan(2f), 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+                ss.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
-                holder.tvs.get("tv"+i).setPaddingRelative(0,0,0,0);
-                holder.tvs.get("tv"+i).setTextColor(Color.parseColor("#ffffff"));
+                holder.tvs.get("tv" + i).setPaddingRelative(0, 0, 0, 0);
+                holder.tvs.get("tv" + i).setTextColor(Color.parseColor("#ffffff"));
 
                 holder.llHolder.setBackgroundColor(Color.parseColor("#303F9F"));
-                holder.tvs.get("tv"+i).setText(ss);
-            }
-            else
-            {
-                holder.tvs.get("tv"+i).setBackground(border());
-                holder.tvs.get("tv"+i).setText(dataList.get(position)[i]);
+                holder.tvs.get("tv" + i).setText(ss);
+            } else {
+                holder.tvs.get("tv" + i).setBackground(border());
+                holder.tvs.get("tv" + i).setText(dataList.get(position)[i]);
             }
 
-            holder.tvs.get("tv"+i).setEms(ems()[i]/2 +2);
-            holder.tvs.get("tv"+i).setOnClickListener(new View.OnClickListener() {
+            holder.tvs.get("tv" + i).setEms(ems()[i] / 2 + 2);
+            holder.tvs.get("tv" + i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(),((TextView)v).getText(),Toast.LENGTH_SHORT).show();
-                }});
+                    Toast.makeText(v.getContext(), ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
     @Override
