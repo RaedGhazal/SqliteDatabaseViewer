@@ -130,6 +130,7 @@ public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAd
                 holder.llHolder.setBackgroundColor(Color.parseColor("#303F9F"));
                 holder.tvs.get("tv" + i).setText(ss);
             } else {
+                holder.llHolder.setBackgroundColor(Color.parseColor("#FFFFFF"));
                 holder.tvs.get("tv" + i).setBackground(border());
                 holder.tvs.get("tv" + i).setText(dataList.get(position)[i]);
             }
