@@ -41,7 +41,7 @@ RGRecyclerViewAdapter rgRecyclerViewAdapter = new RGRecyclerViewAdapter(YourActi
                 RecyclerView.LayoutManager mLayoutManager= new LinearLayoutManager(context);
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(adapter);
+                recyclerView.setAdapter(rgRecyclerViewAdapter);
 ```
 and That's it.
 -----------------------------------------------------
