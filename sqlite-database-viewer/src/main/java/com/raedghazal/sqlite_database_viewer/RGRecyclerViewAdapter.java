@@ -37,14 +37,8 @@ public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAd
         this.context = context;
         this.headerList = headerList;
         this.dataList = dataList;
-        if (!checkLengths())
-            return;
-        //Add the Header
-        /*String[] header = new String[headerList.size()];
-        for (int i = 0;i<headerList.size();i++)
-            header[i] = headerList.get(i);
-        dataList.add(0,header);
-*/    }
+        checkLengths();
+    }
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -146,10 +140,10 @@ public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAd
         return new MyViewHolder(ll);
     }
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position)
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position)
     {
         for (int i = 0; i< headerList.size(); i++) {
-            if (position == 0) {
+            if (holder.getAdapterPosition() == 0) {
                 SpannableString ss = new SpannableString("." + headerList.get(i));
                 ss.setSpan(new RelativeSizeSpan(2f), 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
                 ss.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
@@ -162,7 +156,7 @@ public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAd
             } else {
                 holder.llHolder.setBackgroundColor(Color.parseColor("#FFFFFF"));
                 holder.tvs.get("tv" + i).setBackground(border()/*context.getResources().getDrawable(R.drawable.border)*//*border()*/);
-                holder.tvs.get("tv" + i).setText(dataList.get(position-1)[i]);
+                holder.tvs.get("tv" + i).setText(dataList.get(holder.getAdapterPosition()-1)[i]);
             }
 
             holder.tvs.get("tv" + i).setEms((dataLength()[i] / 2 )+ 2);
@@ -191,7 +185,7 @@ public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAd
 
         }
 
-        if (position>0)
+        if (holder.getAdapterPosition()>0)
             holder.llHolder.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -201,7 +195,7 @@ public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAd
                     for (int i = 0; i<headerList.size();i++) {
                         Detail detail = new Detail();
                         detail.setHeader(headerList.get(i));
-                        detail.setDetail(dataList.get(position-1)[i]);
+                        detail.setDetail(dataList.get(holder.getAdapterPosition()-1)[i]);
                         details.add(detail);
                     }
                     DetailsAdapter detailsAdapter = new DetailsAdapter(details);
@@ -266,6 +260,7 @@ public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAd
             }
         }
 
+        @NonNull
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
         {
             Context context = parent.getContext();
