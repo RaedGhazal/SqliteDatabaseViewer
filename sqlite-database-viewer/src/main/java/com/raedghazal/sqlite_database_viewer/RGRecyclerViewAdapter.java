@@ -38,7 +38,6 @@ public class RGRecyclerViewAdapter extends RecyclerView.Adapter<RGRecyclerViewAd
         this.headerList = headerList;
         this.dataList = dataList;
         checkLengths();
-        /*update*/
     }
 
     @Override
