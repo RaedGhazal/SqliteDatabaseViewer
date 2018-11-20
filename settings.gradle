@@ -1,1 +1,3 @@
 include ':app', ':sqlite-database-viewer'
+include 'sqlite-database-viewer'
+project(':sqlite-database-viewer').projectDir = new File('/sqlite-database-viewer')
