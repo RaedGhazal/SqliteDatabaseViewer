@@ -1,7 +1,5 @@
 # SqliteDatabaseViewer
-This is an android lib just for testing not ready yet And not the full official one.  
-The Full one gonna be under the name RGLibrary ,will be a general library which contains many features (not a specific topic) that helps you in your Applications programming.  
-if you wanna try this anyways it has 2 features now.
+This is an android library just for testing during the development of your app. 
 
 ### First : 
 ### Viewing Your SQliteDatabase ->
@@ -45,17 +43,3 @@ RGRecyclerViewAdapter rgRecyclerViewAdapter = new RGRecyclerViewAdapter(YourActi
 ```
 and That's it.
 -----------------------------------------------------
-if you like my test lib and wanna get the full official one when it gets published !
-email me at <Raed.osama078@gmail.com>
-with  
-- Title :
-> Android-Lib
-
-- Body :
-> Hi ,I am Interesting in your library and I would like to have an email when the full one is ready.
-
-Also you can add to the body any features you would like me to add to the full library,  
-Or even any question in android programming you want help with.  
-I would be honored to help.  
-Thank you !
-
